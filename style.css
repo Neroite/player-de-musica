@@ -1,0 +1,11 @@
+body{
+    background-image: linear-gradient(
+        rgb(59,88,83), /* Ponto inicial do gradiente */
+        rgb(29,40,42) /* Ponto final do gradiente*/
+    );
+    height: 100vh; /* Vertigal Hight ocupando 100% */
+    color: white;
+    font-family: sans-serif;
+    display: flex;
+    flex-direction: column;
+}
