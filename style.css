@@ -3,9 +3,35 @@ body{
         rgb(59,88,83), /* Ponto inicial do gradiente */
         rgb(29,40,42) /* Ponto final do gradiente*/
     );
-    height: 100vh; /* Vertigal Hight ocupando 100% */
+    height: 100vh; /* Vertical Hight ocupando 100% */
     color: white;
     font-family: sans-serif;
     display: flex;
     flex-direction: column;
+}
+
+#below-cover{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+} 
+
+#button-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.button{
+    font-size: 1.5em;
+}
+
+.button-navigate{
+    font-size: 2em;
+}
+
+.button-biggest{
+    font-size: 3em;
 }
