@@ -8,22 +8,26 @@
     <link rel="stylesheet" href="/style.css">
 </head>
 <body>
-    <h4>Player de Música Hashtag</h4>
-    <img src="images/fhop.jpeg"></p>
-    <div id="below-cover">
-        <div id="song-info">
-            <div>Nome da Música</div>
-            <div>Nome da banda</div>
+    <div class="music-container">
+        <h4 id="playlist-title">Player de Música Hashtag</h4>
+        <img id="cover" src="images/fhop.jpeg"></p>
+        <div id="below-cover">
+            <div id="song-info">
+                <div id="song-name">Nome da Música</div>
+                <div id="band-name" class="light-color">Nome da banda</div>
+            </div>
+            <div id="like" class="button light-color"><i class="bi bi-heart"></i></div>
         </div>
-        <div id="like" class="button"><i class="bi bi-heart"></i></div>
-    </div>
-    <div>Barra de progresso</div>
-    <div id="button-container">
-        <div id="shuflle" class="button"><i class="bi bi-shuffle"></i></div>
-        <div id="skip" class="button button-navigate"><i class="bi bi-skip-start-fill"></i></div>
-        <div id="play" class="button button-biggest"><i class="bi bi-play-circle"></i></div>
-        <div id="next" class="butoon button-navigate"><i class="bi bi-skip-end-fill"></i></div>
-        <div id="repeat" class="button"><i class="bi bi-repeat"></i></div>
+        <div id="progress-bar">
+            <div id="current-progress"></div>
+        </div>
+        <div id="button-container">
+            <div id="shuflle" class="button"><i class="bi bi-shuffle"></i></div>
+            <div id="skip" class="button button-navigate"><i class="bi bi-skip-start-fill"></i></div>
+            <div id="play" class="button button-biggest"><i class="bi bi-play-circle-fill"></i></div>
+            <div id="next" class="butoon button-navigate"><i class="bi bi-skip-end-fill"></i></div>
+            <div id="repeat" class="button"><i class="bi bi-repeat"></i></div>
+        </div>
     </div>
 </body>
 </html>
