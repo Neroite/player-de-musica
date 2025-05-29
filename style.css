@@ -44,8 +44,10 @@ button{
     font-size: 3em;
 }
 
-#cover{
-    width: 450px;
+#cover {
+    width: 480px;
+    height: 480px; /* Adiciona altura fixa */
+    object-fit: cover; /* Garante que a imagem preencha sem distorcer */
 }
  
 #playlist-title{
