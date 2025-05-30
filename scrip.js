@@ -5,6 +5,7 @@ const cover = document.getElementById("cover");
 const play = document.getElementById("play");
 const previous = document.getElementById("previous");
 const next = document.getElementById("next");
+const currentProgress = document.getElementById("current-progress");
 
 const deepEletronic = {
     songName: "Deep Electronic",
@@ -24,7 +25,7 @@ const experimentalCinematic = {
     file : "Experimental_Cinematic",
 }
 
-const playlist = [brainImplant, deepEletronic, experimentalCinematic];
+const playlist = [experimentalCinematic, deepEletronic, brainImplant];
 let index = 0;
 
 let isPlaying = false;
@@ -80,8 +81,14 @@ function nextSong() {
     playSong();
 }
 
+function upateProgressBar(){
+    const barWitdh = (song.currentTime/song.duration)*100;
+    currentProgress.style.setProperty("--progress",`${barWitdh}%`);
+}
+
 initializeSong();
 
 play.addEventListener("click", playPauseDetect);
 previous.addEventListener("click", previousSong);
 next.addEventListener("click", nextSong);
+song.addEventListener("timeupdate", upateProgressBar);

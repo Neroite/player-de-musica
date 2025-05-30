@@ -9,7 +9,9 @@ body{
     display: flex;
     flex-direction: column; /* Colocando os elementos em coluna */
     align-items: center;
+    margin: 0;
 }
+
 
 button{
     background-color: inherit;
@@ -46,7 +48,7 @@ button{
 
 #cover {
     width: 480px;
-    height: 480px; /* Adiciona altura fixa */
+    height: 450px; /* Adiciona altura fixa */
     object-fit: cover; /* Garante que a imagem preencha sem distorcer */
 }
  
@@ -75,9 +77,10 @@ button{
 }
 
 #current-progress{
+    --progress : 0%; /*Variável do css que será utilizada na funcão da barra de progresso*/
     background-color: white;
     height: inherit; /* Herda a altura do elemento pai #progress-bar*/
-    width: 50%;
+    width: var(--progress);
     border-radius: inherit;
 }
 
