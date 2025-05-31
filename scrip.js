@@ -6,6 +6,7 @@ const play = document.getElementById("play");
 const previous = document.getElementById("previous");
 const next = document.getElementById("next");
 const currentProgress = document.getElementById("current-progress");
+const progressContainer = document.getElementById("progress-container");
 
 const deepEletronic = {
     songName: "Deep Electronic",
@@ -82,8 +83,16 @@ function nextSong() {
 }
 
 function upateProgressBar(){
-    const barWitdh = (song.currentTime/song.duration)*100;
-    currentProgress.style.setProperty("--progress",`${barWitdh}%`);
+    const barWitdh = (song.currentTime/song.duration)*100; 
+    currentProgress.style.setProperty("--progress",`${barWitdh}%`); 
+}
+
+function jumpTo(event){
+    const widht = progressContainer.clientWidth; /* A largura do container de progresso */
+    const clickPosition = event.offsetX; /* O quanto clicou a partir do inicio do evento a esquerda */
+    const jumpToTime = (clickPosition / widht) * song.duration; /* Calcula o tempo correspondente ao clique */ 
+    song.currentTime = jumpToTime; /* Atualiza o tempo atual da música */
+
 }
 
 initializeSong();
@@ -92,3 +101,4 @@ play.addEventListener("click", playPauseDetect);
 previous.addEventListener("click", previousSong);
 next.addEventListener("click", nextSong);
 song.addEventListener("timeupdate", upateProgressBar);
+progressContainer.addEventListener("click", jumpTo)

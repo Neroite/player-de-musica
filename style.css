@@ -48,7 +48,7 @@ button{
 
 #cover {
     width: 480px;
-    height: 450px; /* Adiciona altura fixa */
+    height: 400px; /* Adiciona altura fixa */
     object-fit: cover; /* Garante que a imagem preencha sem distorcer */
 }
  
@@ -73,7 +73,6 @@ button{
     height: 3px;
     width: 100%;
     border-radius: 15px;
-    margin-bottom: 1em;
 }
 
 #current-progress{
@@ -84,4 +83,7 @@ button{
     border-radius: inherit;
 }
 
+#progress-container{
+    padding-bottom: 1em;
+}
 
