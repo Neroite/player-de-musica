@@ -10,6 +10,8 @@ const progressContainer = document.getElementById("progress-container");
 const shuffleButton = document.getElementById("shuffle");
 const likeButton = document.getElementById("like");
 const repeatButton = document.getElementById("repeat");
+const songTime = document.getElementById("song-time");
+const totalTime = document.getElementById("total-time");
 
 const deepEletronic = {
     songName: "Deep Electronic",
@@ -34,6 +36,7 @@ let sortedPlaylist = [...originalPlaylist] // Copia o array original para o novo
 let index = 0;
 let isPlaying = false;
 let isShuffled = false; 
+let repeatOn = false;
 
 function playSong() {
     play.querySelector(".bi").classList.remove("bi-play-circle-fill");    
@@ -87,9 +90,10 @@ function nextSong() {
     playSong();
 }
 
-function upateProgressBar(){
+function upateProgress(){
     const barWitdh = (song.currentTime/song.duration)*100; 
     currentProgress.style.setProperty("--progress",`${barWitdh}%`); 
+    songTime.innerText = toHHMMSS(song.currentTime);
 }
 
 function jumpTo(event){
@@ -123,11 +127,48 @@ function shuffleButtonClicked(){
     }
 }        
 
+function repeatButtonClicked(){
+    if(repeatOn === false){
+        repeatOn = true;
+        repeatButton.classList.add("button-active");
+    }
+    else{
+        repeatOn = false;
+        repeatButton.classList.remove("button-active");
+    }
+}
+
+function nextOrRepeat(){
+    if(repeatOn === false){
+        nextSong();
+    }
+    else{
+        playSong();
+    }
+}
+
+function toHHMMSS(originalNumber){
+    let hours = Math.floor(originalNumber/3600) /* Calcula as horas */
+    let min = Math.floor((originalNumber - hours * 3600) / 60); /* Calcula os minutos restantes */
+    let secs = Math.floor(originalNumber - hours * 3600 - min * 60); /* Calcula os segundos restantes */
+
+    return (`${hours.toString().padStart(2,"0")}:${min.toString().padStart(2, "0")}:${secs.toString().padStart(2, "0")}`); /* Formata o tempo para HH:MM:SS */
+} 
+
+
+function updateTotalTime(){
+    toHHMMSS(song.duration);
+    totalTime.innerText = toHHMMSS (song.duration);
+}
+
 initializeSong();  
 
 play.addEventListener("click", playPauseDetect);
 previous.addEventListener("click", previousSong);
 next.addEventListener("click", nextSong);
-song.addEventListener("timeupdate", upateProgressBar);
+song.addEventListener("timeupdate", upateProgress);
+song.addEventListener("ended", nextOrRepeat);
+song.addEventListener("loadedmetadata", updateTotalTime);
 progressContainer.addEventListener("click", jumpTo);
 shuffleButton.addEventListener("click",shuffleButtonClicked)
+repeatButton.addEventListener("click",repeatButtonClicked)
