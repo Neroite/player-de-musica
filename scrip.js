@@ -17,21 +17,24 @@ const deepEletronic = {
     songName: "Deep Electronic",
     artist: "Free Electronic Sounds",
     file : "deep_electronic",
+    liked : false
 }
 
 const brainImplant = {
     songName: "Brain Implant",
     artist: "Free Implant Sounds",
     file : "brain_implant",
+    liked : false
 }
 
 const experimentalCinematic = {
     songName: "Experimental Cinematic",
     artist: "Free Cinematic Sounds",
     file : "Experimental_Cinematic",
+    liked : false
 }
 
-const originalPlaylist = [experimentalCinematic, deepEletronic, brainImplant];
+const originalPlaylist = JSON.parse(localStorage.getItem("playlist")) ?? [experimentalCinematic, deepEletronic, brainImplant];
 let sortedPlaylist = [...originalPlaylist] // Copia o array original para o novo array, os ... espalham a lista de objetos dentro do array
 let index = 0;
 let isPlaying = false;
@@ -66,6 +69,7 @@ function initializeSong(){
     song.src = `songs/${sortedPlaylist[index].file}.mp3`;
     songName.innerText = sortedPlaylist[index].songName;
     bandName.innerText = sortedPlaylist[index].artist;
+    likeButtonRender();
 }
 
 function previousSong() {
@@ -155,10 +159,33 @@ function toHHMMSS(originalNumber){
     return (`${hours.toString().padStart(2,"0")}:${min.toString().padStart(2, "0")}:${secs.toString().padStart(2, "0")}`); /* Formata o tempo para HH:MM:SS */
 } 
 
-
 function updateTotalTime(){
     toHHMMSS(song.duration);
     totalTime.innerText = toHHMMSS (song.duration);
+}
+
+function likeButtonRender(){
+    if (sortedPlaylist[index].liked === true){
+        likeButton.querySelector(".bi").classList.remove("bi-heart");
+        likeButton.querySelector(".bi").classList.add("bi-heart-fill");
+        likeButton.classList.add("button-active");
+    }
+    else{
+        likeButton.querySelector(".bi").classList.add("bi-heart");
+        likeButton.querySelector(".bi").classList.remove("bi-heart-fill");
+        likeButton.classList.remove("button-active");
+    }
+}
+
+function likeButtonClicked(){
+    if(sortedPlaylist[index].liked === false){
+        sortedPlaylist[index].liked = true;
+    }
+    else{
+        sortedPlaylist[index].liked = false;
+    }
+    likeButtonRender();
+    localStorage.setItem("playlist", JSON.stringify(originalPlaylist));
 }
 
 initializeSong();  
@@ -171,4 +198,4 @@ song.addEventListener("ended", nextOrRepeat);
 song.addEventListener("loadedmetadata", updateTotalTime);
 progressContainer.addEventListener("click", jumpTo);
 shuffleButton.addEventListener("click",shuffleButtonClicked)
-repeatButton.addEventListener("click",repeatButtonClicked)
+likeButton.addEventListener("click", likeButtonClicked);
